@@ -11,4 +11,9 @@ public class ClosedMin extends Min {
     return super.isWithin(value) || this.value == value;
   }
 
+  @Override
+	public String toString() {
+		return "[" + this.value;
+  }	
+  
 }
