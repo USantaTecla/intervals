@@ -21,20 +21,5 @@ public class MaxTest {
   public void givenMaxOpenedwhenGreaterWithEqualValueThenFalse(){
     assertFalse(new Max(4, true).greaterOrEquals(4));
   }
-
-  @Test
-  public void givenMaxClosedwhenGreaterWithLessValueThenTrue(){
-    assertTrue(new Max(4, false).greaterOrEquals(0.0));
-  }
-
-  @Test
-  public void givenMaxClosedwhenGreaterWithGreaterValueThenFalse(){
-    assertFalse(new Max(4, false).greaterOrEquals(5.0));
-  }
-
-  @Test
-  public void givenMaxClosedwhenGreaterWithEqualValueThenFalse(){
-    assertTrue(new Max(4, false).greaterOrEquals(4));
-  }
  
 }

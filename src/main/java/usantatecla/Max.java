@@ -2,8 +2,8 @@ package usantatecla;
 
 public class Max {
 
-  double value;
-  boolean open;
+  protected double value;
+  protected boolean open;
 
 	public Max(double value, boolean open) {
     this.value = value;
