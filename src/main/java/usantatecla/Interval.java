@@ -6,7 +6,7 @@ public class Interval {
 	}
 
 	public boolean include(double d) {
-		return false;
+		return true;
 	}
 
 
