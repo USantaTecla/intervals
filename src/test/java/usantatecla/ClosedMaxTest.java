@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static usantatecla.NumberLine.VALUE;
 
-public class IncludedMaxTest extends MaxTest {
+public class ClosedMaxTest extends MaxTest {
 
   @Override
   @BeforeEach
