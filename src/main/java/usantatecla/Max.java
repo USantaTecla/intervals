@@ -3,18 +3,13 @@ package usantatecla;
 public class Max {
 
   protected double value;
-  protected boolean open;
 
-	public Max(double value, boolean open) {
+	public Max(double value) {
     this.value = value;
-    this.open = open;
   }
 
-	public boolean greaterOrEquals(double value) {
-    if (this.open){
+	public boolean isOnLeft(double value) {
       return this.value > value;
-    }
-    return this.value >= value;
 	}
   
 }

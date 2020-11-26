@@ -2,11 +2,11 @@ package usantatecla;
 
 public class IncludedMax extends Max {
   
-  public IncludedMax(int i, boolean b) {
-    super(i,b);
+  public IncludedMax(int value) {
+    super(value);
 	}
 
-public boolean greaterOrEquals(double value) {
+public boolean isOnLeft(double value) {
     return this.value >= value;
   } 
    
