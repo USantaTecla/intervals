@@ -2,40 +2,42 @@ package usantatecla;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BuilderIntervalTest {
-  
+
+  private double min;
+  private double max;
+
+  @BeforeEach
+  public void before(){
+    this.min = -2.2;
+    this.max = 4.4;
+  }
+
   @Test
   public void givenIntervalBuilderWhenOpenOpen(){
-    Interval interval = new IntervalBuilder().open(2.2).open(4.4).build();
-    System.out.println(interval);
-    System.out.println(new Interval(new Min(2.2), new Max(4.4)));
-    assertEquals(interval, new Interval(new Min(2.2), new Max(4.4)));
+    Interval interval = new IntervalBuilder().open(this.min).open(this.max).build();
+    assertEquals(interval, new Interval(new Min(this.min), new Max(this.max)));
   }
 
   @Test
   public void givenIntervalBuilderWhenOpenClosed(){
-    Interval interval = new IntervalBuilder().open(2.2).closed(4.4).build();
-    System.out.println(interval);
-    System.out.println(new Interval(new Min(2.2), new ClosedMax(4.4)));
-    assertEquals(interval, new Interval(new Min(2.2), new ClosedMax(4.4)));
+    Interval interval = new IntervalBuilder().open(this.min).closed(this.max).build();
+    assertEquals(interval, new Interval(new Min(this.min), new ClosedMax(this.max)));
   }
 
   @Test
   public void givenIntervalBuilderWhenClosedOpen(){
-    Interval interval = new IntervalBuilder().closed(2.2).open(4.4).build();
-    System.out.println(interval);
-    System.out.println(new Interval(new ClosedMin(2.2), new Max(4.4)));
-    assertEquals(interval, new Interval(new ClosedMin(2.2), new Max(4.4)));
+    Interval interval = new IntervalBuilder().closed(this.min).open(this.max).build();
+    assertEquals(interval, new Interval(new ClosedMin(this.min), new Max(this.max)));
   }
 
   @Test
   public void givenIntervalBuilderWhenClosedClosed(){
-    Interval interval = new IntervalBuilder().closed(2.2).closed(4.4).build();
-    System.out.println(interval);
-    System.out.println(new Interval(new ClosedMin(2.2), new ClosedMax(4.4)));
-    assertEquals(interval, new Interval(new ClosedMin(2.2), new ClosedMax(4.4)));
+    Interval interval = new IntervalBuilder().closed(this.min).closed(this.max).build();
+    assertEquals(interval, new Interval(new ClosedMin(this.min), new ClosedMax(this.max)));
   }
 
 }
