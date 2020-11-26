@@ -8,7 +8,7 @@ public class Max {
     this.value = value;
   }
 
-	public boolean isOnLeft(double value) {
+	public boolean isWithin(double value) {
       return this.value > value;
 	}
   

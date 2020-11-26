@@ -1,25 +1,20 @@
 package usantatecla;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class IncludedMaxTest {
+public class IncludedMaxTest extends MaxTest {
 
-  @Test
-  public void givenMaxClosedwhenGreaterWithLessValueThenTrue(){
-    assertTrue(new IncludedMax(4).isOnLeft(0.0));
+  @Override
+  public Max createMax(double value){
+    return new ClosedMax(value);
   }
 
   @Test
-  public void givenMaxClosedwhenGreaterWithGreaterValueThenFalse(){
-    assertFalse(new IncludedMax(4).isOnLeft(5.0));
-  }
-
-  @Test
-  public void givenMaxClosedwhenGreaterWithEqualValueThenFalse(){
-    assertTrue(new IncludedMax(4).isOnLeft(4));
+  @Override
+  public void givenMaxWhenIsWithinWithEqualsValue(){
+    assertTrue(createMax(VALUE).isWithin(equals(VALUE)));
   }
   
 }

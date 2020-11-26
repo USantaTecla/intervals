@@ -12,7 +12,7 @@ public class Interval {
 	}
 
 	public boolean include(double value) {
-			return this.min <= value && this.max.isOnLeft(value);
+			return this.min <= value && this.max.isWithin(value);
 	}
 
 }
