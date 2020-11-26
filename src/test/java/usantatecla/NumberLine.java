@@ -16,4 +16,5 @@ public class NumberLine {
   static double greater(double value) {
     return value + NumberLine.DEVIATION;
   }
+  
 }
