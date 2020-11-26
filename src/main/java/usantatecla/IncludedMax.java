@@ -2,7 +2,7 @@ package usantatecla;
 
 public class IncludedMax extends Max {
   
-  public IncludedMax(int value) {
+  public IncludedMax(double value) {
     super(value);
 	}
 
