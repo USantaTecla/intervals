@@ -8,7 +8,7 @@ public class ClosedMax extends Max {
 
   @Override
   public boolean isWithin(double value) {
-    return this.value >= value;
+    return super.isWithin(value) || this.value == value;
   }
 
 }
