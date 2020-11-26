@@ -2,19 +2,19 @@ package usantatecla;
 
 public class Max {
 
-  private double value;
-  private boolean open;
+  double value;
+  boolean open;
 
-	public Max(boolean b, int i) {
-    this.value = i;
-    this.open = b;
+	public Max(double value, boolean open) {
+    this.value = value;
+    this.open = open;
   }
 
-	public boolean greater(double d) {
+	public boolean greaterOrEquals(double value) {
     if (this.open){
-      return this.value > d;
+      return this.value > value;
     }
-    return this.value >= d;
+    return this.value >= value;
 	}
   
 }
