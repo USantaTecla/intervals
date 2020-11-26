@@ -5,18 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import static usantatecla.NumberLine.VALUE;
-
 public class IntervalTest {
 
   @Test
   public void givenIntervaOpenOpenlwhenIncludeWithIncludedValueThenTrue() {
-    assertTrue(new Interval(true, -1.7, new Max(VALUE)).include(NumberLine.less(VALUE)));
-    assertFalse(new Interval(true, -1.7, new Max(VALUE)).include(NumberLine.equals(VALUE)));
-    assertFalse(new Interval(true, -1.7, new Max(VALUE)).include(NumberLine.greater(VALUE)));
-    assertTrue(new Interval(true, -1.7, new ClosedMax(VALUE)).include(NumberLine.less(VALUE)));
-    assertTrue(new Interval(true, -1.7, new ClosedMax(VALUE)).include(NumberLine.equals(VALUE)));
-    assertFalse(new Interval(true, -1.7, new ClosedMax(VALUE)).include(NumberLine.greater(VALUE)));
+    Point right = new Point(4.4);
+    assertTrue(new Interval(true, -1.7, new Max(right.getEquals())).include(right.getLess()));
+    assertFalse(new Interval(true, -1.7, new Max(right.getEquals())).include(right.getEquals()));
+    assertFalse(new Interval(true, -1.7, new Max(right.getEquals())).include(right.getGreater()));
+    assertTrue(new Interval(true, -1.7, new ClosedMax(right.getEquals())).include(right.getLess()));
+    assertTrue(new Interval(true, -1.7, new ClosedMax(right.getEquals())).include(right.getEquals()));
+    assertFalse(new Interval(true, -1.7, new ClosedMax(right.getEquals())).include(right.getGreater()));
   }
 
 }

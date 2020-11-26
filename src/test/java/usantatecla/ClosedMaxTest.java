@@ -3,21 +3,18 @@ package usantatecla;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import static usantatecla.NumberLine.VALUE;
 
 public class ClosedMaxTest extends MaxTest {
 
   @Override
-  @BeforeEach
-  public void before(){
-    this.max = new ClosedMax(VALUE);
+  protected Max createMax() {
+    return new ClosedMax(this.point.getEquals());
   }
 
   @Test
   @Override
   public void givenMaxWhenIsWithinWithEqualsValue(){
-    assertTrue(this.max.isWithin(NumberLine.equals(VALUE)));
+    assertTrue(this.max.isWithin(this.point.getEquals()));
   }
   
 }
