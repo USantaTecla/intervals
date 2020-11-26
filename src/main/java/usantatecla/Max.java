@@ -6,7 +6,7 @@ public class Max {
 	}
 
 	public boolean greater(double d) {
-		return false;
+		return true;
 	}
   
 }
