@@ -22,12 +22,23 @@ public class IntervalBuilder {
       this.maxConfigured = true;
     }
 		return this;
+  }
+  
+  public IntervalBuilder closed(double value) {
+    assert !this.minConfigured || !this.maxConfigured;;
+    if (!this.minConfigured){
+      this.min = new ClosedMin(value);
+      this.minConfigured = true;
+    } else if (!this.maxConfigured){
+      this.max = new ClosedMax(value);
+      this.maxConfigured = true;
+    }
+		return this;
 	}
 
 	public Interval build() {
     assert this.minConfigured && this.maxConfigured;
 		return new Interval(this.min, this.max);
-	}
-  
+	} 
 
 }
