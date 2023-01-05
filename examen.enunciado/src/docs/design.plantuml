@@ -1,0 +1,164 @@
+@startuml
+
+class Game {
+  + {static} void main(args)
+  - Game()
+  - void reset()
+  - void playGames()
+  - void playGame()
+  - boolean isResumed()
+}
+
+class YesNoDialog {
+	- String answer;
+	+ void read(String message)	
+	+ boolean isAffirmative()	
+	- char getAnswer()
+	+ boolean isNegative() 
+}
+
+class Turn {
+  {static} int NUMBER_PLAYERS = 2;
+  - int activePlayer;
+  Turn(board)
+  void reset()
+  void dropToken()
+  void writeResult()
+  Player getActivePlayer()
+}
+
+class BoundedIntDialog {
+  - ClosedInterval LIMITS;
+  public BoundedIntDialog(min, max)
+  public int read(String message)
+}
+
+abstract class Player {
+  Player(color, board)
+  void dropToken()
+  ~ void writePlayer()
+  ~ abstract int getColumn();
+  public boolean isComplete(int column)
+  public Color getColor()
+}
+
+class UserPlayer extends Player {
+  UserPlayer(color, board)
+  ~ int getColumn()
+}
+
+abstract class MachinePlayer extends Player {
+  MachinePlayer(color, board)
+  ~ int getColumn()
+  ~ abstract int _getColumn()
+  ~ void writeColumn(column)
+}
+
+class RandomMachinePlayer extends MachinePlayer {
+  RandomMachinePlayer(color, board)
+  ~ int _getColumn()
+  ~ int getRandomColumn()
+}
+
+class Board {
+  - Coordinate lastDrop;
+  Board()
+  void reset()
+  - void setColor(coordinate, color)
+  void dropToken(column, color)
+  boolean isComplete(column)
+  boolean isComplete()
+  void writeln()
+  - void writeHorizontal()
+  boolean isWinner()
+  - boolean isWinner(coordinates)
+  void writeResult()
+  - boolean isOccupied(coordinate, color)
+  - boolean isEmpty(coordinate)
+  - Color getColor(coordinate)
+}
+
+class LinePositioner {
+  {static} int LENGTH = 4;
+  - {static} final int MAX_DISPLACEMENT = LENGTH - 1;
+  - int displacements;
+  LinePositioner(origin)
+  boolean hasNextPosition()
+  List<Coordinate> nextPosition()
+  - List<Coordinate> getCoordinates()
+  - List<Coordinate> getDirectionCoordinates()
+  - List<Coordinate> getShiftedCoordinates(coordinates)
+}
+
+enum Color {
+  RED
+  YELLOW
+  NULL
+  - {static} Color[] PLAYERS = {Color.RED, Color.YELLOW};
+  + {static} Color get(ordinal)
+  + boolean isNull()
+  + Color getOpposite()
+  + char getCode()
+  + String toString()
+}
+
+enum Direction {
+  NORTH
+  NORTH_EAST
+  EAST
+  SOUTH_EAST
+  SOUTH
+  SOUTH_WEST
+  WEST
+  NORTH_WEST
+  NULL
+  - final ClosedInterval LIMITS
+
+  - Direction()
+  - Direction(row, column)
+  + Direction next()
+	+ Coordinate next(coordinate)
+	+ Direction getOpposite()
+	- boolean isNull()
+}
+
+class Coordinate {
+	- int column;
+	- int row;
+	public Coordinate() 
+	public Coordinate(row, column)
+	public Coordinate copy()
+	public int getRow()
+	public int getColumn() 
+	public String toString() 
+	public int hashCode()
+	public boolean equals(obj) 
+}
+
+class ClosedInterval {
+	- int min;
+	- int max;
+	+ ClosedInterval(min, max)
+	+ boolean isIncluded(value)
+}
+
+Game *-down-> Turn : turn
+Game *-down-> Board : board
+Game .down.> YesNoDialog
+Turn *-down-> "2" Player : players
+Turn -down-> Board : board
+Turn .down.> BoundedIntDialog
+BoundedIntDialog .down.> ClosedInterval
+Player *-down-> Color : color
+Player -down-> Board : board
+Board *-down-> "6x7" Color : colors
+Board .down.> LinePositioner
+Board .down.> Coordinate
+Board .down.> Direction
+Board .down.> ClosedInterval
+LinePositioner *-down-> Coordinate : origin
+LinePositioner -down-> Direction : direction
+Direction *-down-> Coordinate
+Direction .down.> ClosedInterval
+
+@enduml
