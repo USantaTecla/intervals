@@ -195,6 +195,7 @@ class Board {
 
     }
 
+    // por qué vuelve a poner?!?!
     public int cost(Color color) {
         int cost = 0;
         for (Integer column : this.getValidColumns()) {

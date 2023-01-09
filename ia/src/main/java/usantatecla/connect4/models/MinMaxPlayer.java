@@ -2,9 +2,9 @@ package usantatecla.connect4.models;
 
 import java.util.List;
 
-public class MinMaxPlayer extends RandomMachinePlayer {
+public class MinMaxPlayer extends RandomPlayer {
 
-  private static final int MAX_STEPS = 5;
+  private static final int MAX_STEPS = 4;
 
   MinMaxPlayer(Color color, Board board) {
     super(color, board);
@@ -17,7 +17,7 @@ public class MinMaxPlayer extends RandomMachinePlayer {
     int maxMin = Integer.MIN_VALUE;
     for (Integer column : validColumns) {
       this.board.dropToken(column, color);
-      int min = getMinMin(0);
+      int min = getMinCost(0);
       this.board.removeTop(column);
       if (min > maxMin) {
         maxMin = min;
@@ -27,19 +27,19 @@ public class MinMaxPlayer extends RandomMachinePlayer {
     return bestColumn;
   }
 
-  private int getMinMin(int steps) {
+  private int getMinCost(int steps) {
     if (this.isEnd(steps)) {
       return this.getCost();
     }
-    int minMin = Integer.MAX_VALUE;
+    int minCost = Integer.MAX_VALUE;
     for (Integer column : this.board.getValidColumns()) {
       this.board.dropToken(column, color.getOpposite());
-      int min = getMaxMin(steps + 1);
+      int cost = getMaxCost(steps + 1);
       this.board.removeTop(column);
-      if (min < minMin)
-        minMin = min;
+      if (cost < minCost)
+        minCost = cost;
     }
-    return minMin;
+    return minCost;
   }
 
   private boolean isEnd(int steps) {
@@ -47,7 +47,7 @@ public class MinMaxPlayer extends RandomMachinePlayer {
   }
 
   private int getCost() {
-    if (this.board.isFinished()) {
+    // if (this.board.isFinished()) {
       if (this.board.isWinner(this.color)) {
         return Integer.MAX_VALUE;
       }
@@ -55,23 +55,23 @@ public class MinMaxPlayer extends RandomMachinePlayer {
         return Integer.MIN_VALUE;
       }
       return 0;
-    }
-    return this.board.cost(this.color) - this.board.cost(this.color.getOpposite());
+    // }
+    // return this.board.cost(this.color) - this.board.cost(this.color.getOpposite());
   }
 
-  private int getMaxMin(int steps) {
+  private int getMaxCost(int steps) {
     if (this.isEnd(steps)) {
       return this.getCost();
     }
-    int maxMin = Integer.MIN_VALUE;
+    int maxCost = Integer.MIN_VALUE;
     for (Integer column : this.board.getValidColumns()) {
       this.board.dropToken(column, color);
-      int min = getMinMin(steps + 1);
+      int cost = getMinCost(steps + 1);
       this.board.removeTop(column);
-      if (min > maxMin)
-        maxMin = min;
+      if (cost > maxCost)
+        maxCost = cost;
     }
-    return maxMin;
+    return maxCost;
   }
 
 }

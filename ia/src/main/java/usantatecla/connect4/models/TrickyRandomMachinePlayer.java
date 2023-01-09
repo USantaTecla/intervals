@@ -1,6 +1,6 @@
 package usantatecla.connect4.models;
 
-public class TrickyRandomMachinePlayer extends RandomMachinePlayer {
+public class TrickyRandomMachinePlayer extends RandomPlayer {
 
     TrickyRandomMachinePlayer(Color color, Board board) {
         super(color, board);
